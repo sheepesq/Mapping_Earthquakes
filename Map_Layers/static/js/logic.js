@@ -10,7 +10,7 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
     id: 'mapbox/outdoors-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: API_KEY
+    accessToken: API_KEY 
 });
 
 // We create the dark view tile layer that will be an option for our map.
