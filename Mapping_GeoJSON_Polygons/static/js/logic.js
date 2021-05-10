@@ -1,5 +1,4 @@
 /////////13.5.6///////////////////
-
 // Add console.log to check to see if our code is working.
 console.log("working");
 
@@ -7,7 +6,7 @@ console.log("working");
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/satellite-streets-v11',
+    id: 'mapbox/satellite-v9',
     tileSize: 512,
     zoomOffset: -1,
     accessToken: API_KEY 
@@ -28,25 +27,36 @@ let baseMaps = {
 
   // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-    center: [-79.39119482699992, 43.68108112399995],
-    zoom: 12,
+    center: [43.6532, -79.3832],
+    zoom: 10,
     layers: [streets]
 })
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
-
 // BOTH ARE NEEDED FOR THE GEO JSON TO WORK
 
 // Accessing the airport GeoJSON URL
-let torontoHoods = "https://github.com/sheepesq/Mapping_Earthquakes/blob/main/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/sheepesq/Mapping_Earthquakes/main/torontoNeighborhoods.json";
 
 // Grabbing our GeoJSON data.
 d3.json(torontoHoods).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data).addTo(map);
+L.geoJson(data,{
+color: 'yellow',
+weight:2,
+onEachfeature: function (feature, layer) {
+layer.bindPopup( "<h3> Hood: " + feature.properties.AREA_NAME + "</h3>")
+}
+}).addTo(map)
 });
 
-
+/*
+L.geoJson(data, {
+  onEachFeature: function(feature, layer) {
+    layer.bindPopup();
+   }
+});
+*/
