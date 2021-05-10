@@ -22,7 +22,8 @@ Having the tileLayer() method before accessing large datasets ensures that
 the map gets loaded before the data is added to it. */
 
 // Accessing the airport GeoJSON URL
-let airportData = "https://raw.githubusercontent.com/<GitHub_name>/Mapping_Earthquakes/main/majorAirports.json";
+let airportData = "https://raw.githubusercontent.com/sheepesq/Mapping_Earthquakes/main/majorAirports.json";
+
 
 
 // Grabbing our GeoJSON data.
